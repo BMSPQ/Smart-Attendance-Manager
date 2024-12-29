@@ -276,15 +276,15 @@
           return;
         }
 
-        const currentPercentage = (present / total) * 100;
-        let result = "";
+        const currentPercentage = ((present / total) * 100).toFixed(2);
+        let result = `Your current attendance is ${currentPercentage}%. `;
 
         if (currentPercentage >= percentage) {
           const maxBunks = Math.floor((present - (percentage / 100) * total) / (1 - percentage / 100));
-          result = `You can safely bunk up to ${maxBunks} more day(s).`;
+          result += `You can safely bunk up to ${maxBunks} more day(s).`;
         } else {
           const neededDays = Math.ceil((percentage / 100) * total - present);
-          result = `You need to attend ${neededDays} more day(s) to reach ${percentage}% attendance.`;
+          result += `You need to attend ${neededDays} more day(s) to reach ${percentage}% attendance.`;
         }
 
         document.getElementById("output").textContent = result;
