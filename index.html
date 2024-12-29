@@ -51,8 +51,8 @@
 
       body {
         font-family: "Poppins", sans-serif;
-        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-        color: #333;
+        background-color: #ffffff; /* White background */
+        color: #333333; /* Dark text */
         line-height: 1.6;
         display: flex;
         flex-direction: column;
@@ -60,11 +60,11 @@
       }
 
       header {
-        background-color: #4caf50;
-        color: white;
+        background-color: #000000; /* Black */
+        color: #ffffff; /* White text */
         padding: 20px;
         text-align: center;
-        border-radius: 0 0 10px 10px;
+        border-radius: 0 0 20px 20px;
       }
 
       header h1 {
@@ -87,19 +87,20 @@
       }
 
       .card {
-        background: white;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
+        background: #ffffff; /* White background for the card */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
         padding: 30px;
         max-width: 500px;
         width: 100%;
         text-align: center;
+        border: 1px solid #dcdcdc; /* Light Gray border */
       }
 
       .card h2 {
         font-size: 1.8rem;
         margin-bottom: 20px;
-        color: #4caf50;
+        color: #ffd700; /* Yellow */
       }
 
       .input-group {
@@ -111,60 +112,65 @@
         display: block;
         font-weight: 500;
         margin-bottom: 8px;
+        color: #000000; /* Black text */
       }
 
       .input-group input,
       .input-group select {
         width: 100%;
         padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
         font-size: 1rem;
+        margin-top: 8px;
+        background-color: #f9f9f9; /* Light Gray background for input fields */
       }
 
       .btn {
-        background-color: #4caf50;
-        color: white;
+        background-color: #ffd700; /* Yellow */
+        color: #000000; /* Black text */
         border: none;
         padding: 15px 20px;
         font-size: 1rem;
-        border-radius: 5px;
+        border-radius: 8px;
         cursor: pointer;
         transition: background-color 0.3s;
       }
 
       .btn:hover {
-        background-color: #45a049;
+        background-color: #ffcc33; /* Lighter Yellow on hover */
       }
 
       .output {
         margin-top: 20px;
         font-size: 1.2rem;
         font-weight: 500;
-        color: #333;
+        color: #000000; /* Black text */
       }
 
       footer {
-        background-color: #4caf50;
-        color: white;
+        background-color: #000000; /* Black footer */
+        color: #ffffff; /* White text */
         text-align: center;
         padding: 10px 20px;
-        border-radius: 10px 10px 0 0;
+        border-radius: 20px 20px 0 0;
       }
 
       .description-box {
-        background: white;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
+        background: #ffffff; /* White background */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
         padding: 20px;
         max-width: 600px;
         margin: 20px auto;
         text-align: left;
+        color: #333;
+        border: 1px solid #dcdcdc; /* Light Gray border */
       }
 
       .description-box h3 {
         font-size: 1.5rem;
-        color: #4caf50;
+        color: #ffd700; /* Yellow */
         margin-bottom: 10px;
       }
 
@@ -179,6 +185,17 @@
 
       .description-box ul li {
         margin-bottom: 8px;
+      }
+
+      /* Accent Color - White or Light Gray */
+      .highlight {
+        color: #000000; /* Black for highlights */
+        font-weight: bold;
+      }
+
+      .warning {
+        color: #dcdcdc; /* Light Gray for warning messages */
+        font-weight: bold;
       }
     </style>
   </head>
