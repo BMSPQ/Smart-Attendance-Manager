@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Analytics and AdSense -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-YM7N846T6G"
+    ></script>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3496241521487888"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-YM7N846T6G");
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Nikhil George" />
+    <meta
+      name="description"
+      content="75 Attendance Percentage Calculator for College. Find out the number of days you should attend to attain 75% attendance or the number of days you can bunk if you have more than 75%."
+    />
+    <meta
+      name="keywords"
+      content="attendance, calculator, college, percentage, tracker"
+    />
+    <title>Smart Attendance Manager</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* General Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        color: #333;
+        line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      header {
+        background-color: #4caf50;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        border-radius: 0 0 10px 10px;
+      }
+
+      header h1 {
+        font-size: 2.5rem;
+        font-weight: 600;
+      }
+
+      header p {
+        font-size: 1.2rem;
+        margin-top: 8px;
+      }
+
+      main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .card {
+        background: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 30px;
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+      }
+
+      .card h2 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: #4caf50;
+      }
+
+      .input-group {
+        margin-bottom: 20px;
+        text-align: left;
+      }
+
+      .input-group label {
+        display: block;
+        font-weight: 500;
+        margin-bottom: 8px;
+      }
+
+      .input-group input,
+      .input-group select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+      }
+
+      .btn {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 15px 20px;
+        font-size: 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .btn:hover {
+        background-color: #45a049;
+      }
+
+      .output {
+        margin-top: 20px;
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #333;
+      }
+
+      footer {
+        background-color: #4caf50;
+        color: white;
+        text-align: center;
+        padding: 10px 20px;
+        border-radius: 10px 10px 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Smart Attendance Manager</h1>
+      <p>
+        Determine your attendance percentage and discover the number of days you can skip or must attend to meet your attendance goal.
+      </p>
+    </header>
+
+    <main>
+      <div class="card">
+        <h2>Calculate Attendance</h2>
+        <div class="input-group">
+          <label for="percentage">Percentage Required</label>
+          <select id="percentage">
+            <option value="60">60%</option>
+            <option value="65">65%</option>
+            <option value="70">70%</option>
+            <option value="75" selected>75%</option>
+            <option value="80">80%</option>
+            <option value="85">85%</option>
+            <option value="90">90%</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="present">Days Attended</label>
+          <input
+            type="number"
+            id="present"
+            placeholder="Enter days attended"
+            min="0"
+          />
+        </div>
+
+        <div class="input-group">
+          <label for="total">Total Days</label>
+          <input
+            type="number"
+            id="total"
+            placeholder="Enter total days"
+            min="0"
+          />
+        </div>
+
+        <button class="btn" id="calculate-btn">Calculate</button>
+
+        <div id="output" class="output"></div>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Smart Attendance Manager</p>
+    </footer>
+
+    <script>
+      document.getElementById("calculate-btn").addEventListener("click", () => {
+        const percentage = parseInt(document.getElementById("percentage").value);
+        const present = parseInt(document.getElementById("present").value);
+        const total = parseInt(document.getElementById("total").value);
+
+        if (isNaN(present) || isNaN(total) || total <= 0 || present < 0) {
+          document.getElementById("output").textContent =
+            "Please enter valid numbers for attendance.";
+          return;
+        }
+
+        const currentPercentage = (present / total) * 100;
+        let result = "";
+
+        if (currentPercentage >= percentage) {
+          const maxBunks = Math.floor((present - (percentage / 100) * total) / (1 - percentage / 100));
+          result = `You can safely bunk up to ${maxBunks} more day(s).`;
+        } else {
+          const neededDays = Math.ceil((percentage / 100) * total - present);
+          result = `You need to attend ${neededDays} more day(s) to reach ${percentage}% attendance.`;
+        }
+
+        document.getElementById("output").textContent = result;
+      });
+    </script>
+  </body>
+</html>
