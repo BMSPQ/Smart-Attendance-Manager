@@ -1,25 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Google Analytics and AdSense -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-YM7N846T6G"
-    ></script>
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3496241521487888"
-      crossorigin="anonymous"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-YM7N846T6G");
-    </script>
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Nikhil George" />
@@ -51,8 +32,8 @@
 
       body {
         font-family: "Poppins", sans-serif;
-        background-color: #ffffff; /* White background */
-        color: #333333; /* Dark text */
+        background-color: #121212; /* Dark background */
+        color: #e0e0e0; /* Light text */
         line-height: 1.6;
         display: flex;
         flex-direction: column;
@@ -60,7 +41,7 @@
       }
 
       header {
-        background-color: #000000; /* Black */
+        background-color: #1e1e1e; /* Dark Gray */
         color: #ffffff; /* White text */
         padding: 20px;
         text-align: center;
@@ -87,14 +68,14 @@
       }
 
       .card {
-        background: #ffffff; /* White background for the card */
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        background: #1e1e1e; /* Dark background for the card */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         border-radius: 20px;
         padding: 30px;
         max-width: 500px;
         width: 100%;
         text-align: center;
-        border: 1px solid #dcdcdc; /* Light Gray border */
+        border: 1px solid #333333; /* Dark Gray border */
       }
 
       .card h2 {
@@ -112,18 +93,19 @@
         display: block;
         font-weight: 500;
         margin-bottom: 8px;
-        color: #000000; /* Black text */
+        color: #ffffff; /* White text */
       }
 
       .input-group input,
       .input-group select {
         width: 100%;
         padding: 12px;
-        border: 1px solid #ddd;
+        border: 1px solid #444;
         border-radius: 8px;
         font-size: 1rem;
         margin-top: 8px;
-        background-color: #f9f9f9; /* Light Gray background for input fields */
+        background-color: #333333; /* Dark input fields */
+        color: #ffffff; /* White text */
       }
 
       .btn {
@@ -145,11 +127,11 @@
         margin-top: 20px;
         font-size: 1.2rem;
         font-weight: 500;
-        color: #000000; /* Black text */
+        color: #ffffff; /* White text */
       }
 
       footer {
-        background-color: #000000; /* Black footer */
+        background-color: #1e1e1e; /* Dark Gray footer */
         color: #ffffff; /* White text */
         text-align: center;
         padding: 10px 20px;
@@ -157,15 +139,15 @@
       }
 
       .description-box {
-        background: #ffffff; /* White background */
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        background: #1e1e1e; /* Dark background */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         border-radius: 20px;
         padding: 20px;
         max-width: 600px;
         margin: 20px auto;
         text-align: left;
-        color: #333;
-        border: 1px solid #dcdcdc; /* Light Gray border */
+        color: #e0e0e0; /* Light text */
+        border: 1px solid #333333; /* Dark Gray border */
       }
 
       .description-box h3 {
@@ -189,12 +171,12 @@
 
       /* Accent Color - White or Light Gray */
       .highlight {
-        color: #000000; /* Black for highlights */
+        color: #ffd700; /* Yellow for highlights */
         font-weight: bold;
       }
 
       .warning {
-        color: #dcdcdc; /* Light Gray for warning messages */
+        color: #ff3333; /* Red for warning messages */
         font-weight: bold;
       }
 
@@ -207,6 +189,19 @@
       .green {
         color: green;
         font-weight: bold;
+      }
+
+      /* Modern Error Message Styling */
+      .error-message {
+        background-color: #ff4d4d; /* Red background for errors */
+        color: #fff; /* White text */
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-top: 20px;
+        border: 2px solid #ff3333; /* Darker red border */
+        box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
       }
     </style>
   </head>
@@ -223,9 +218,8 @@
         <h2>Calculate Attendance</h2>
         <div class="input-group">
           <label for="percentage">Percentage Required</label>
-          <!-- Dropdown for selecting attendance percentage -->
           <select id="percentage">
-            <option value="" selected>Select</option> <!-- Default option -->
+            <option value="" selected>Select</option>
             <option value="60">60%</option>
             <option value="65">65%</option>
             <option value="70">70%</option>
@@ -260,6 +254,7 @@
         <button class="btn" id="reset-btn">Reset</button>
 
         <div id="output" class="output"></div>
+        <div id="error-message" class="error-message" style="display: none;"></div>
       </div>
     </main>
 
@@ -301,11 +296,22 @@
         const present = parseInt(document.getElementById("present").value);
         const total = parseInt(document.getElementById("total").value);
 
-        if (isNaN(present) || isNaN(total) || total <= 0 || present < 0) {
+        // Check if the percentage is selected
+        if (isNaN(percentage) || percentage === "") {
           document.getElementById("output").textContent =
-            "Please enter valid numbers for attendance.";
+            "Please select a valid attendance percentage.";
           return;
         }
+
+        // Validate the present and total days
+        if (isNaN(present) || isNaN(total) || total <= 0 || present < 0 || present > total) {
+          document.getElementById("error-message").style.display = "block";
+          document.getElementById("error-message").textContent =
+            "Please enter valid numbers for attendance and total days. Total days must be greater than or equal to attended days.";
+          return;
+        }
+
+        document.getElementById("error-message").style.display = "none"; // Hide error message
 
         const currentPercentage = ((present / total) * 100).toFixed(2);
         let result = `<span class="highlight">Your current attendance is ${currentPercentage}%.</span><br>`;
@@ -329,6 +335,7 @@
         document.getElementById("present").value = "";
         document.getElementById("total").value = "";
         document.getElementById("output").textContent = "";
+        document.getElementById("error-message").style.display = "none"; // Hide error message
       });
     </script>
   </body>
